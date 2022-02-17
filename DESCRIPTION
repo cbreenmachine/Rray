@@ -1,0 +1,10 @@
+Package: Rray
+Title: Utility functions for analyzing EPIC 850K array data, to stay consistent across projects / platforms.
+Version: 0.0.1
+Authors@R: 
+    person("Coleman", "Breen", , "cebreen@wisc.edu", role = c("aut", "cre"))
+Description: To analyze EPIC 850K array data, we need to perform a variety of processing steps and checks. We usually want to use the same configuration from one project (dataset) to another. This package includes "workhorse" functions to replicate analyses from one computing environment and/or file system and/or dataset to another. The hope is that by abstracting away some of the 5-15 line workflows, it will make code more readable and usable.
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2.9000
