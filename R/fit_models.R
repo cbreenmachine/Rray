@@ -1,7 +1,16 @@
 
 
-fit_models <- function(M, df, forumla){
-  return(NULL)
+fit_models <- function(M, df, ann.df, model){
+
+  # Prepare 
+  ann.sub.df <- ann.df[match(rownames(M),ann.df$Name), c("chr","pos", "strand", "UCSC_RefGene_Name", "UCSC_RefGene_Group","Relation_to_Island")]
+
+
+  fit <- limma::lmFit(M[ ,-c("V1"), with=F], model)
+  fit2 <- limma::eBayes(fit)
+
+  DMPs <- topTable(fit2, coef=2,num=Inf,sort.by='none',genelist=ann.sub.df)
+  return(DMPs)
 }
 
 
@@ -49,12 +58,7 @@ fit_models <- function(M, df, forumla){
 
 #modSv <- model.matrix(~ . - ID, df)
 #colnames(modSv)
-#fit <- lmFit(M, modSv)
-#fit2 <- eBayes(fit)
 
-#fit2$p.value[ ,"bmi"]
-
-#DMPs <- topTable(fit2, coef="bmi",num=Inf,sort.by='none',genelist=ann.sub.df)
 
 #fwrite(fit2$coefficients, file.path(args$odir, "coefficients.csv"),row.names=TRUE)
 #fwrite(DMPs, file.path(args$odir, "DMPs.csv"),row.names=TRUE)
